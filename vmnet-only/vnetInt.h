@@ -46,8 +46,12 @@
 #define LOG(level, args)
 #endif
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 11, 0)
+/* For kernels prior to 6.11, we need these
+   Kernel 6.11 and later define these, so in order to avoid having to hunt down include dependencies we
+   simply won't define them at all for kernels > 6.11 */
 #define MAX(_a, _b)   (((_a) > (_b)) ? (_a) : (_b))
-
+#endif
 /*
  * Ethernet
  */
