@@ -30,8 +30,13 @@ resulted in building modules from old branch snapshots and reporting issues
 that have been addressed long ago. Therefore, starting with kernel 6.0,
 these per kernel tags are no longer going to be provided.
 
-At the moment, changes are tested to build against all (vanilla) kernel
-releases starting with 4.9.
-
 This repository is provided "as is" with no guarantees. Use the contents on
 your own risk.
+
+NOTE: This repository has been forked from https://github.com/mkubecek/vmware-host-modules
+only for the continuation of patches of kernel modules for:
+
+* VMware Workstation 17.0.2 with kernel 6.9 and later
+* VMware Workstaiton 17.6.3 with kernel 6.15.3 and later
+
+
