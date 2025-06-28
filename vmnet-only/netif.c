@@ -1,5 +1,5 @@
 /*********************************************************
- * Copyright (C) 1998-2014,2016,2019,2022 VMware, Inc. All rights reserved.
+ * Copyright (C) 1998-2014,2016,2019,2022-2023 VMware, Inc. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -41,6 +41,7 @@
 #include <linux/file.h>
 
 #include "vnetInt.h"
+#include "compat_autoconf.h"
 #include "compat_netdevice.h"
 #include "vmnetInt.h"
 
@@ -253,7 +254,7 @@ VNetNetIf_Create(char *devName,  // IN:
 
    memset(&netIf->stats, 0, sizeof netIf->stats);
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0) && !defined(SLE15_SP5_BACKPORTS)
    memcpy(dev->dev_addr, netIf->port.paddr, sizeof netIf->port.paddr);
 #else
    eth_hw_addr_set(dev, netIf->port.paddr);
@@ -345,11 +346,11 @@ VNetNetIfReceive(VNetJack        *this, // IN: jack
                         netIf->dev->flags)) {
       goto drop_packet;
    }
-   
+
    /* send to the host interface */
    skb->dev = netIf->dev;
    skb->protocol = eth_type_trans(skb, netIf->dev);
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0) && !defined(RHEL91_BACKPORTS)
    netif_rx_ni(skb);
 #else
    netif_rx(skb);
@@ -357,7 +358,7 @@ VNetNetIfReceive(VNetJack        *this, // IN: jack
    netIf->stats.rx_packets++;
 
    return;
-   
+
  drop_packet:
    dev_kfree_skb(skb);
 }
@@ -540,7 +541,7 @@ VNetNetifSetMAC(struct net_device *dev, // IN:
       return -EINVAL;
    }
    memcpy(netIf->port.paddr, addr->sa_data, dev->addr_len);
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0) && !defined(SLE15_SP5_BACKPORTS)
    memcpy(dev->dev_addr, netIf->port.paddr, dev->addr_len);
 #else
    eth_hw_addr_set(dev, netIf->port.paddr);
