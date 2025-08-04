@@ -48,6 +48,7 @@
 #include <asm/io.h>
 #include <asm/page.h>
 #include <asm/uaccess.h>
+#include <asm/irq_vectors.h>
 #include <linux/capability.h>
 #include <linux/kthread.h>
 #include <linux/wait.h>
@@ -1995,7 +1996,11 @@ HostIF_InitUptime(void)
 void
 HostIF_CleanupUptime(void)
 {
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 15, 0)
+   del_timer_sync(&uptimeState.timer);
+#else
    timer_delete_sync(&uptimeState.timer);
+#endif
 }
 
 
@@ -3410,7 +3415,11 @@ HostIF_SafeRDMSR(unsigned int msr,   // IN
    int err;
    u64 v;
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 16, 0)
+   err = rdmsrq_safe(msr, &v);
+#else
    err = rdmsrl_safe(msr, &v);
+#endif
    *val = (err == 0) ? v : 0;  // Linux corrupts 'v' on error
 
    return err;
