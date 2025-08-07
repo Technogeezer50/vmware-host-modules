@@ -344,8 +344,11 @@ LinuxDriverExit(void)
    misc_deregister(&vmmon_miscdev);
 
    Log("Module %s: unloaded\n", vmmon_miscdev.name);
-
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 15, 0)
+   del_timer_sync(&tscTimer);
+#else
    timer_delete_sync(&tscTimer);
+#endif
 
    Vmx86_CleanupHVIOBitmap();
    Task_Terminate();
