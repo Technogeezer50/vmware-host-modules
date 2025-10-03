@@ -26,6 +26,10 @@ ccflags-y := $(CC_OPTS) $(INCLUDE)
 
 obj-m += $(DRIVER).o
 
+# phystrack and task use patterns that confuse objtool in newer kernels; skip validation for them.
+OBJECT_FILES_NON_STANDARD_common/phystrack.o := y
+OBJECT_FILES_NON_STANDARD_common/task.o := y
+
 $(DRIVER)-y := $(subst $(SRCROOT)/, , $(patsubst %.c, %.o, \
 		$(wildcard $(SRCROOT)/linux/*.c $(SRCROOT)/common/*.c \
 		$(SRCROOT)/bootstrap/*.c)))
