@@ -293,7 +293,7 @@ PhysTrack_Free(PhysTracker *tracker)
 
 void
 PhysTrack_Add(PhysTracker *tracker, // IN/OUT
-              MPN mpn)              // IN: MPN of page to be added
+             MPN mpn)              // IN: MPN of page to be added
 {
    unsigned int p1;
    unsigned int p2;
@@ -321,6 +321,7 @@ PhysTrack_Add(PhysTracker *tracker, // IN/OUT
    PHYSTRACK_GETL3POS(p3, pos, bit);
    VERIFY((dir3->bits[pos] & bit) == 0);
    dir3->bits[pos] |= bit;
+   return;
 }
 
 
@@ -342,7 +343,7 @@ PhysTrack_Add(PhysTracker *tracker, // IN/OUT
 
 void
 PhysTrack_Remove(PhysTracker *tracker, // IN/OUT
-                 MPN mpn)              // IN: MPN of page to be removed.
+                MPN mpn)              // IN: MPN of page to be removed.
 {
    unsigned int p1;
    unsigned int p2;
@@ -364,6 +365,7 @@ PhysTrack_Remove(PhysTracker *tracker, // IN/OUT
    PHYSTRACK_GETL3POS(p3, pos, bit);
    VERIFY((dir3->bits[pos] & bit) != 0);
    dir3->bits[pos] &= ~bit;
+   return;
 }
 
 

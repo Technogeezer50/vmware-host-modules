@@ -24,6 +24,9 @@ EXTRA_CFLAGS += $(call vm_check_build, $(SRCROOT)/netif_trans_update.c,-DVMW_NET
 
 obj-m += $(DRIVER).o
 
+# userif uses patterns that confuse objtool in newer kernels; skip validation for it.
+OBJECT_FILES_NON_STANDARD_userif.o := y
+
 $(DRIVER)-y := driver.o hub.o userif.o netif.o bridge.o procfs.o smac_compat.o \
 	       smac.o vnetEvent.o vnetUserListener.o
 
