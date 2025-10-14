@@ -35,7 +35,8 @@ only for the continuation of patches of kernel modules for:
 
 * VMware Workstaiton 17.6.4
 * Kernel versions 6.15.3 through 6.16.*
-* Kernels compiled with the GCC kernel compilation system (not clang).
+* Fedora/Red Hat or Debian-based distributions (Debian/Ubuntu/Pop!OS, etc)
+* Kernels compiled with GCC (not clang).
 
 If you don't meet these conditions, you may wish to review Hyphaed's VMware module patch
 repository at https://github.com/Hyphaed/vmware-fmmon-vmnet-linux-6.17.x
@@ -45,6 +46,8 @@ your own risk.
 
 Additional credits:
 
-Thanks to the following for patches that have been included here:
+Thanks to the following for either directly submitting or referencing 
+patches that have been included here:
+
 * Ed Statham (@Ed42) 
-* Hyphaed (@Hyphaed) https://github.com/ngodn/vmware-vmmod-vmnet-linux-6.17.x 
+* Hyphaed (@Hyphaed) https://github.com/Hyphaed/vmware-vmmod-vmnet-linux-6.17.x 
