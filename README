@@ -30,8 +30,19 @@ resulted in building modules from old branch snapshots and reporting issues
 that have been addressed long ago. Therefore, starting with kernel 6.0,
 these per kernel tags are no longer going to be provided.
 
-At the moment, changes are tested to build against all (vanilla) kernel
-releases starting with 4.9.
+NOTE: This branch has been forked from https://github.com/mkubecek/vmware-host-modules
+only for the continuation of patches of kernel modules for:
+
+* VMware Workstaiton 17.6.4
+* Kernel versions 6.15.3 through 6.16.*
+* Kernels compiled with the GCC kernel compilation system (not clang).
+
+If you don't meet these conditions, you may wish to review Hyphaed's VMware module patch
+repository at https://github.com/Hyphaed/vmware-fmmon-vmnet-linux-6.17.x
 
 This repository is provided "as is" with no guarantees. Use the contents on
 your own risk.
+
+Additional credits:
+
+Patches have been sourced from https://github.com/ngodn/vmware-vmmod-vmnet-linux-6.16.x and 
