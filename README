@@ -45,4 +45,6 @@ your own risk.
 
 Additional credits:
 
-Patches have been sourced from https://github.com/ngodn/vmware-vmmod-vmnet-linux-6.16.x and 
+Thanks to the following for patches that have been included here:
+* Ed Statham (@Ed42) 
+* Hyphaed (@Hyphaed) https://github.com/ngodn/vmware-vmmod-vmnet-linux-6.17.x 
